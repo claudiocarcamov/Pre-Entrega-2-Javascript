@@ -1,6 +1,7 @@
 let eleccion = true;
 let continuar = true;
 let envio = 0;
+let precioProducto = 0;
 
 //Se crea función constructora de Producto
 function Producto (id, nombre, precio){
@@ -59,7 +60,7 @@ while(continuar == true){
 
 let seguir = true;
 let cantidad = 0;
-let precio = 0;
+//let precio = 0;
 let precioTotal = 0;
 
 function calcularPrecioTotal (precio, cantidad){
@@ -70,10 +71,18 @@ let contador = 1;
 
 while(seguir == true){
 
-    let pedido = prompt ("Favor seleccionar figura a comprar:\n 1.- Figura Plástico derretida    Precio: $4.000\n 2.- Homero Simpson    Precio: $6.000\n 3.- Bob Esponja    Precio: $10.000\n 4.- Calamardo    Precio: 8.500\n 5.- Goku    Precio: $15.000\n 6.- Salir");
+    let productosOfrecidos = "";
+
+    //Recorre todos los productos que posee el arreglo
+    for (const key in productos) {
+        productosOfrecidos = productosOfrecidos + (productos[key].id + ".- " + productos[key].nombre + " " + productos[key].precio + "\n");
+    }
+
+    let pedido = prompt ("Favor seleccionar producto a comprar\n" + productosOfrecidos + "\n0.- Salir")
+    //Muestra por pantalla todos los productos disponibles, incluso aquellos que han sido agregados por Mantenedor    let pedido = prompt ("Favor seleccionar figura a comprar:\n" + productosOfrecidos + "0.-Salir");
     pedido = parseInt (pedido);
 
-    switch(pedido){
+     /*switch(pedido){
         case 1:
             precio = 4000;
             cantidad = prompt ("Favor seleccionar cantidad");
@@ -114,7 +123,7 @@ while(seguir == true){
             alert ("El precio total sin envío es: " + precioTotal);
             contador ++;
             break;
-        case 6:
+        case 0:
             // Si usuario escoge opción "Salir" pero no ha escogido producto antes, el costo de envío será costo 0, si no se cobraría solo el costo de envío pero sin el producto
             if (contador == 1){
                 envio = 0;
@@ -126,7 +135,26 @@ while(seguir == true){
         default:
             alert ("Opción no válida");
             break;
+    } */
+
+    if (pedido > 0){
+    cantidad = prompt ("Favor seleccionar cantidad");
+    cantidad = parseInt (cantidad);
+    precioProducto = productos [pedido-1].precio;
+    calcularPrecioTotal (precioProducto, cantidad);
+    alert ("El precio total sin envío es: " + precioTotal);
+    contador ++;
     }
+
+    if (pedido == 0){
+        if (contador == 1){
+            envio = 0;
+        }
+        alert ("¡Nos vemos pronto!");
+        // Si el usuario escoge opción "Salir" no debe mostrarse menú de productos nuevamente
+        seguir = false;
+    }
+
 }
 
 let precioTotalConEnvio = precioTotal + envio;
@@ -146,5 +174,6 @@ if (inicio == 2){
 
 else{
     eleccion = false;
+    alert ("¡Que estés muy bien!");
 }
 }
