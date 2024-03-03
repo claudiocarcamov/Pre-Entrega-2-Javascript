@@ -1,7 +1,25 @@
 let continuar = true;
 let envio = 0;
 
-while(continuar == true){
+function Producto (id, nombre, precio){
+    this.id = id;
+    this.nombre = nombre;
+    this.precio = precio;
+}
+
+const producto1 = new Producto (1,"Figura Plástico derretida",4000);
+const producto2 = new Producto (2,"Homero Simpson",6000);
+const producto3 = new Producto (3,"Bob Esponja",10000);
+const producto4 = new Producto (4,"Calamardo",8500);
+const producto5 = new Producto (5,"Goku",15000);
+
+console.log(producto1);
+
+for (const key in producto1){
+    console.log(key);
+}
+
+ while(continuar == true){
 
 // En primer lugar el usuario deberá escoger la opción de dirección de envío, puesto que el costo varía por lugar    
     let direccion = prompt ("Favor seleccionar donde vives:\n 1.- Región Metropolitana\n 2.- Región de Valparaíso o Región de Libertador Bernardo O'Higgins\n 3.- Otras regiones");
