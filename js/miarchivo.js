@@ -1,25 +1,39 @@
+let eleccion = true;
 let continuar = true;
 let envio = 0;
 
+//Se crea función constructora de Producto
 function Producto (id, nombre, precio){
     this.id = id;
     this.nombre = nombre;
     this.precio = precio;
 }
 
+//Se crea arreglo de productos, donde por defecto ya tendrá ciertos productos
 const producto1 = new Producto (1,"Figura Plástico derretida",4000);
 const producto2 = new Producto (2,"Homero Simpson",6000);
 const producto3 = new Producto (3,"Bob Esponja",10000);
 const producto4 = new Producto (4,"Calamardo",8500);
 const producto5 = new Producto (5,"Goku",15000);
 
-console.log(producto1);
+const productos = [];
+productos[0] = producto1;
+productos[1] = producto2;
+productos[2] = producto3;
+productos[3] = producto4;
+productos[4] = producto5;
 
-for (const key in producto1){
-    console.log(key);
-}
+//console.log(productos);
 
- while(continuar == true){
+while (eleccion == true){
+
+//La idea es que se elija entre la compra que efectuará el usuario o el mantenedor del Administrador de la Plataforma Ecommerce donde agregará productos en caso que requiera
+let inicio = prompt ("Favor elija qué desea realizar: \n1.- Compra usuario \n2.- Mantenedor Administrador\n3.- Salir");
+inicio = parseInt (inicio);
+
+if (inicio == 1){
+
+while(continuar == true){
 
 // En primer lugar el usuario deberá escoger la opción de dirección de envío, puesto que el costo varía por lugar    
     let direccion = prompt ("Favor seleccionar donde vives:\n 1.- Región Metropolitana\n 2.- Región de Valparaíso o Región de Libertador Bernardo O'Higgins\n 3.- Otras regiones");
@@ -118,3 +132,19 @@ while(seguir == true){
 let precioTotalConEnvio = precioTotal + envio;
 
 alert ("Tu pedido tendrá el valor total de" + " " + precioTotalConEnvio)
+
+}
+
+if (inicio == 2){
+    let nuevoNombreProducto = prompt ("Favor ingresar nombre del producto a agregar");
+    let nuevoPrecioProducto = prompt ("Favor ingresar precio del producto a agregar");
+    nuevoPrecioProducto = parseInt (nuevoPrecioProducto);
+    let posicionArrayProductos= productos.length
+    productos [posicionArrayProductos] = new Producto (posicionArrayProductos + 1, nuevoNombreProducto, nuevoPrecioProducto);
+    console.log (productos);
+}
+
+else{
+    eleccion = false;
+}
+}
