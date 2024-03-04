@@ -82,61 +82,6 @@ while(seguir == true){
     //Muestra por pantalla todos los productos disponibles, incluso aquellos que han sido agregados por Mantenedor    let pedido = prompt ("Favor seleccionar figura a comprar:\n" + productosOfrecidos + "0.-Salir");
     pedido = parseInt (pedido);
 
-     /*switch(pedido){
-        case 1:
-            precio = 4000;
-            cantidad = prompt ("Favor seleccionar cantidad");
-            cantidad = parseInt (cantidad);
-            calcularPrecioTotal (precio, cantidad);
-            alert ("El precio total sin envío es: " + precioTotal);
-            contador ++;
-            break;
-        case 2:
-            precio = 6000;
-            cantidad = prompt ("Favor seleccionar cantidad");
-            cantidad = parseInt (cantidad);
-            calcularPrecioTotal (precio, cantidad);
-            alert ("El precio total sin envío es: " + precioTotal);
-            contador ++;
-            break;
-        case 3:
-            precio = 10000
-            cantidad = prompt ("Favor seleccionar cantidad");
-            cantidad = parseInt (cantidad);
-            calcularPrecioTotal (precio, cantidad);
-            alert ("El precio total sin envío es: " + precioTotal);
-            contador ++;
-            break;
-        case 4:
-            precio = 8500;
-            cantidad = prompt ("Favor seleccionar cantidad");
-            cantidad = parseInt (cantidad);
-            calcularPrecioTotal (precio, cantidad);
-            alert ("El precio total sin envío es: " + precioTotal);
-            contador ++;
-            break;
-        case 5:
-            precio = 15000
-            cantidad = prompt ("Favor seleccionar cantidad");
-            cantidad = parseInt (cantidad);
-            calcularPrecioTotal (precio, cantidad);
-            alert ("El precio total sin envío es: " + precioTotal);
-            contador ++;
-            break;
-        case 0:
-            // Si usuario escoge opción "Salir" pero no ha escogido producto antes, el costo de envío será costo 0, si no se cobraría solo el costo de envío pero sin el producto
-            if (contador == 1){
-                envio = 0;
-            }
-            alert ("¡Nos vemos pronto!");
-            // Si el usuario escoge opción "Salir" no debe mostrarse menú de productos nuevamente
-            seguir = false;
-            break;
-        default:
-            alert ("Opción no válida");
-            break;
-    } */
-
     if (pedido > 0){
     cantidad = prompt ("Favor seleccionar cantidad");
     cantidad = parseInt (cantidad);
@@ -147,12 +92,17 @@ while(seguir == true){
     }
 
     if (pedido == 0){
+        // Si usuario escoge opción "Salir" pero no ha escogido producto antes, el costo de envío será costo 0, si no se cobraría solo el costo de envío pero sin el producto
         if (contador == 1){
             envio = 0;
         }
         alert ("¡Nos vemos pronto!");
         // Si el usuario escoge opción "Salir" no debe mostrarse menú de productos nuevamente
         seguir = false;
+    }
+
+    if (pedido < 0){
+        alert ("Opción no válida");
     }
 
 }
@@ -164,15 +114,29 @@ alert ("Tu pedido tendrá el valor total de" + " " + precioTotalConEnvio)
 }
 
 if (inicio == 2){
+
     let nuevoNombreProducto = prompt ("Favor ingresar nombre del producto a agregar");
     let nuevoPrecioProducto = prompt ("Favor ingresar precio del producto a agregar");
     nuevoPrecioProducto = parseInt (nuevoPrecioProducto);
-    let posicionArrayProductos= productos.length
-    productos [posicionArrayProductos] = new Producto (posicionArrayProductos + 1, nuevoNombreProducto, nuevoPrecioProducto);
-    console.log (productos);
-}
 
-else{
+    //Se utilizará función "some" para encontrar si el producto existe o no en el arreglo productos
+    const encontrado = productos.some ((el) => el.nombre == nuevoNombreProducto);
+    console.log (encontrado);
+
+    if (encontrado == false){
+        //Si el producto no existe, lo agregará en el sistema
+        let posicionArrayProductos= productos.length
+        productos [posicionArrayProductos] = new Producto (posicionArrayProductos + 1, nuevoNombreProducto, nuevoPrecioProducto);
+        alert ("Producto ingresado exitosamente en el sistema");
+        console.log (productos);
+
+    }else{
+        //Si el producto existe en el sistema, no lo agregará y enviará un mensaje de que ya existe
+        alert ("Producto ya se encuentra ingresado en el sistema");
+    }
+
+}else{
+    
     eleccion = false;
     alert ("¡Que estés muy bien!");
 }
